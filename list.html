@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Health</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 50%; 
+  height: 100%; 
+  overflow: auto; 
+  padding-top: 50px;
+  padding: 5%;
+}
+#nav{
+  position:fixed;
+  width: 100%;
+  left:0px;
+}
+
+#loginbtn {
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px navy;
+  margin: 5px;
+}
+
+#loginbtn:hover {background-color: skyblue}
+
+#loginbtn:active {
+  background-color: powderblue;
+  box-shadow: 0 3px aliceblue;
+  transform: translateY(4px);
+}
+
+
+#signUpBtn{
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: royalblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px navy;
+  margin: 5px;
+}
+#signUpBtn:hover {background-color: dodgerblue}
+
+#signUpBtn:active {
+  background-color: steelblue;
+  box-shadow: 0 3px aliceblue;
+  transform: translateY(4px);
+}
+
+#submitBtn{
+  display: inline-block;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color:darkgray;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px dimgray;
+  margin: 5px;
+}
+#submitBtn:hover {background-color: paleturquoise}
+
+#submitBtn:active {
+  background-color:lightsteelblue;
+  box-shadow: 1px 1px darkslategray;
+  transform: translateY(4px);
+}
+
+#selectBtn{
+  display: inline-block;
+  padding: 6px;
+  outline: none;
+  color: #fff;
+  background-color:darkgray;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px dimgray;
+  margin-top: 10px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+#signUpForm{
+  background-color: lightsteelblue;
+  padding: 15px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.dropdown-menu{
+  padding: 8px;
+  text-align: center;
+  font-size: 20px;
+  background-color: black;
+  opacity:100%;
+}
+
+.dropdown-menu a:hover{
+  background-color: black;
+  color:white;
+}
+
+#dropDownBtn{
+  margin-left:10px;
+  font-size: 20px;
+  background-color: #202020;
+}
+
+#dropDownBtn:hover{
+  background-color: lightgray;
+  color: black;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 70px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#post{
+  text-align:center;
+  width:95%;
+  margin-top:80px;
+  margin-left:40px;
+}
+
+.post{
+  padding:70px;
+  border-radius: 30px;
+  opacity: 80%;
+  color:white;
+}
+body{
+  font-family:Palatino Linotype;
+  background-color:aliceblue;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="nav">
+  <a class="navbar-brand" href="/">
+   <img src={{url_for('static', filename='img/logo.png')}} alt="logo" style="width:40px; height:40px;"> Healthcare Planner
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/product">Store</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/list">Listing of vitamins</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/article">Article</a>
+    </li>
+  </ul>
+  </div>
+</nav>
+
+<div class="position-fixed" id="main">
+  <button class="openbtn" onclick="openNav()" id="selectBtn">☰ </button>  
+</div>
+<body data-spy="scroll" data-target="#list" data-offset="1">
+	<div id="mySidebar" class="sidebar">
+  	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+	<a href="#section1">Vitamin A</a>
+	<div class="dropdown">
+   	 <button type="button" class="btn btn-secondary dropdown-toggle" id="dropDownBtn" data-toggle="dropdown">
+    	  Vitamin B Complex
+   	 </button>
+    	<div class="dropdown-menu">
+            <a class="dropdown-item" href="#section21">Vitamin B1</a>
+            <a class="dropdown-item" href="#section22">Vitamin B2</a>
+            <a class="dropdown-item" href="#section23">Vitamin B3</a>
+            <a class="dropdown-item" href="#section24">Vitamin B5</a>
+            <a class="dropdown-item" href="#section25">Vitamin B6</a>
+            <a class="dropdown-item" href="#section26">Vitamin B12</a>
+          </div>
+  	</div>
+	<a href="#section3">Vitamin C</a>
+	<a href="#section4">Vitamin D</a>
+	<a href="#section5">Vitamin E</a>
+	<a href="#section6">Vitamin K</a>
+</div>
+
+<div class="col-sm col" id="post">
+<h2>Listing of Vitamins: benefits, deficiency and recommended amount</h2> 
+<p>Click on left button to select your choice.</p>
+  <div id="section1"  style="background-color:#F08080;" class="post">
+  <h1>Vitamin A (Retinoids)</h1>
+        <p>Essential for vision Lycopene may lower prostate cancer risk. Keeps tissues and skin healthy. Plays an important role in bone growth and in the immune system. Diets rich in the carotenoids alpha carotene and lycopene seem to lower lung cancer risk. Carotenoids act as antioxidants. Foods rich in the carotenoids lutein and zeaxanthin may protect against cataracts.
+          </br></br> Deficiency: One may notice difficulty seeing in dim light and rough/dry skin.
+          </br></br> Recommended amount: M: 900 mcg (3,000 IU)W: 700 mcg (2,333 IU)
+         </p>
+        <a href="/product" class="btn btn-outline-light ">BUY NOW</a>   
+        </div></br>
+      <div id="section21" style="background-color:#CD5C5C;" class="post">         
+        <h1>Vitamin B1 (Thiamine)</h1>
+        <p>Helps convert food into energy. Needed for healthy skin, hair, muscles, and brain and is critical for nerve function.
+          </br></br> Deficiency: Symptoms include burning feet, weakness in extremities, rapid heart rate, swelling, anorexia, nausea, fatigue, and gastrointestinal problems.
+          </br></br> Recommended amount: M: 1.2 mg, W: 1.1 mg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>         
+      <div id="section22" style="background-color:#E9967A;" class="post">         
+        <h1>Vitamin B2 (Riboflavin)</h1>
+        <p>Helps convert food into energy. Needed for healthy skin, hair, blood, and brain.
+          </br></br> Deficiency: Symptoms include cracks, fissures and sores at corner of mouth and lips, dermatitis, conjunctivitis, photophobia, glossitis of tongue, anxiety, loss of appetite, and fatigue.
+          </br></br> Recommended amount: M: 1.3 mg, W: 1.1 mg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>       
+      <div id="section23" style="background-color:#FFA07A;" class="post">         
+        <h1>Vitamin B3 (Niacin)</h1>
+        <p>Helps convert food into energy. Needed for healthy skin, hair, blood, and brain.
+          </br></br> Deficiency: Symptoms include dermatitis, diarrhea, dementia, and stomatitis.
+          </br></br> Recommended amount: M: 16 mg, W: 14 mg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>       
+       <div id="section24" style="background-color:#FA9072;" class="post">         
+        <h1>Vitamin B5 (Pantothenic acid)</h1>
+        <p>Helps convert food into energy. Helps make lipids (fats), neurotransmitters, steroid hormones, and hemoglobin.
+          </br></br> Deficiency: Very unlikely. Only in severe malnutrition may one notice tingling of feet.
+          </br></br> Recommended amount: M: 5 mg, W: 5 mg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>     
+       <div id="section25" style="background-color:#E98074;" class="post">         
+        <h1>Vitamin B6 (Pyridoxine)</h1>
+        <p>Aids in lowering homocysteine levels and may reduce the risk of heart diseaseHelps convert tryptophan to niacin and serotonin, a neurotransmitter that plays key roles in sleep, appetite, and moods. Helps make red blood cells Influences cognitive abilities and immune function.
+          </br></br> Deficiency: Symptoms include chelosis, glossitis, stomatitis, dermatitis (all similar to vitamin B2 deficiency), nervous system disorders, sleeplessness, confusion, nervousness, depression, irritability, interference with nerves that supply muscles and difficulties in movement of these muscles, and anemia. Prenatal deprivation results in mental retardation and blood disorders for the newborn.
+          </br></br> Recommended amount: 31–50 years old: M: 1.3 mg, W: 1.3 mg; 51+ years old: M: 1.7 mg, W: 1.5 mg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>      
+       <div id="section26" style="background-color:#CD5C5C;" class="post">         
+        <h1>Vitamin B12 (Cobalamin)</h1>
+        <p>Aids in lowering homocysteine levels and may lower the risk of heart disease. Assists in making new cells and breaking down some fatty acids and amino acids. Protects nerve cells and encourages their normal growth Helps make red blood cells and DNA.
+          </br></br> Deficiency: Symptoms include pernicious anemia, neurological problems and sprue.
+          </br></br> Recommended amount: M: 2.4 mcg, W: 2.4 mcg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>    
+      <div id="section3" style="background-color:#5F9EA0;" class="post">         
+        <h1>Vitamin C (Ascorbic acid)</h1>
+        <p>Foods rich in vitamin C may lower the risk for some cancers, including those of the mouth, esophagus, stomach, and breast. Long-term use of supplemental vitamin C may protect against cataracts. Helps make collagen, a connective tissue that knits together wounds and supports blood vessel walls. Helps make the neurotransmitters serotonin and norepinephrine Acts as an antioxidant, neutralizing unstable molecules that can damage cells. Bolsters the immune system.
+          </br></br> Deficiency: Symptoms include bruising, gum infections, lethargy, dental cavities, tissue swelling, dry hair and skin, bleeding gums, dry eyes, hair loss, joint paint, pitting edema, anemia, delayed wound healing, and bone fragility. Long-term deficiency results in scurvy.
+          </br></br> Recommended amount: M: 90 mg, W: 75 mg Smokers: Add 35 mg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>
+      <div id="section4"  style="background-color:#90CCF4;" class="post">         
+        <h1>Vitamin D (Calciferol)</h1>
+        <p>Helps maintain normal blood levels of calcium and phosphorus, which strengthen bones. Helps form teeth and bones. Supplements can reduce the number of non-spinal fractures.
+          </br></br> Deficiency: In children a vitamin D deficiency can result in rickets, deformed bones, retarded growth, and soft teeth. In adults a vitamin D deficiency can result in osteomalacia, softened bones, spontaneous fractures, and tooth decay. Those at risk for deficiency include infants, elderly, dark skinned individuals, those with minimal sun exposure, fat malabsorption syndromes, inflammatory bowel diseases, kidney failure, and seizure disorders.
+          </br></br> Recommended amount: 31–70: 15 mcg (600 IU) 71+: 20 mcg (800 IU)</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>      
+      <div id="section5" style="background-color:#4682B4;" class="post">         
+        <h1>Vitamin E (tocopherol)</h1>
+        <p>Acts as an antioxidant, neutralizing unstable molecules that can damage cells. Protects vitamin A and certain lipids from damage. Diets rich in vitamin E may help prevent Alzheimer's disease.
+          </br></br> Deficiency: Only noticed in those with severe malnutrition. However, suboptimal intake of vitamin E is relatively common.
+          </br></br> Recommended amount: 1,000 mg (nearly 1,500 IU natural vitamin E; 2,200 IU synthetic)</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>
+      <div id="section6" style="background-color:#6495ED" class="post">         
+        <h1>Vitamin K</h1>
+        <p>Activates proteins and calcium essential to blood clotting. May help prevent hip fractures.
+          </br></br>Deficiency: Tendency to bleed or hemorrhage and anemia.
+          </br></br> Recommended amount: M: 120 mcg, W: 90 mcg</p>
+	<a href="file:///C:/Users/Yonny/Desktop/product.html" class="btn btn-outline-light ">BUY NOW</a>
+      </div></br>
+    </div>
+
+
+<script>
+// Disable form submissions if there are invalid fields
+(function() {
+  window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('valid');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</html>
+

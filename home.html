@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script><!DOCTYPE html>
+
+  <style type="text/css">
+
+
+  #submitBtn{
+  display: inline-block;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color:darkgray;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px dimgray;
+  margin: 5px;
+  }
+
+  #submitBtn:hover {background-color: paleturquoise}
+
+  #submitBtn:active {
+  background-color: lightsteelblue;
+  box-shadow: 1px 1px darkslategray;
+  transform: translateY(4px);
+  }
+
+  #signUpForm{
+    background-color: lightsteelblue;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    color: white;
+    margin: 70px;
+  }
+  body{
+    font-family:Palatino Linotype;
+    background-color:aliceblue;
+  }
+
+</style>
+ </head>
+ <body>
+
+  <form action="/home" method="POST">
+  <div class="container" id="signUpForm">
+    <h1>Login</h1>
+    <p>Please login your account.</p>
+    <p>Username: <input type="text" name="username" /></p>
+    <p>Password: <input type="text" name="password" /></p>
+    <p><input type="submit" id="submitBtn" name="Submit" /></p>
+  </div>
+  </form>
+  
+
+</body>
+</html>
+
+
+
+

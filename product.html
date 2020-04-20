@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Health</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+h3{
+  color:cadetblue;
+  text-align: center;
+  padding:10px;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 50%; 
+  height: 100%; 
+  overflow: auto; 
+  padding-top: 50px;
+  padding: 5%;
+}
+
+#product {
+  background-color:#ffffff;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius: 15px;
+  border: 2px solid aliceblue;
+}
+
+.producttitle {
+  font-weight:bold;
+  padding:5px 0 5px 0;
+  color:cadetblue;
+}
+
+.productprice {
+  border-top:1px solid	whitesmoke;
+  padding-top:5px;
+}
+
+.pricetext {
+  font-size:1.4em;
+  color: 	paleturquoise;
+  text-shadow: 0px 1px 	mediumaquamarine;
+}
+
+#loginbtn {
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px navy;
+  margin: 5px;
+  float: right;
+}
+
+#loginbtn:hover {background-color: skyblue}
+
+#loginbtn:active {
+  background-color: powderblue;
+  box-shadow: 0 3px aliceblue;
+  transform: translateY(4px);
+}
+
+#signUpBtn{
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: royalblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px navy;
+  margin: 5px;
+  float: right;
+}
+#signUpBtn:hover {background-color: dodgerblue}
+
+#signUpBtn:active {
+  background-color: steelblue;
+  box-shadow: 0 3px aliceblue;
+  transform: translateY(4px);
+}
+
+#submitBtn{
+  display: inline-block;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color:darkgray;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px dimgray;
+  margin: 5px;
+}
+#submitBtn:hover {background-color: paleturquoise}
+
+#submitBtn:active {
+  background-color:	lightsteelblue;
+  box-shadow: 1px 1px darkslategray;
+  transform: translateY(4px);
+}
+
+#signUpForm{
+  background-color: lightsteelblue;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+body{
+  font-family:Palatino Linotype;
+  background-color:aliceblue;
+}
+</style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="nav">
+  <a class="navbar-brand" href="file:///C:/Users/Yonny/Desktop/setup.html">
+   <img src={{url_for('static', filename='img/logo.png')}}  alt="logo" style="width:40px; height:40px;"> Healthcare Planner
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/product">Store</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/list">Listing of vitamins</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/article">Article</a>
+    </li>   
+  </ul>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <a class="btn" role="button" id="loginbtn" href="/loginPage"><span>Login</span></a>
+  <a class="btn" role="button" id="signUpBtn" href="/cart"><span>Order</span></a>
+
+
+  <h3>Vitamin Products</h3>
+  <div class="row">
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/a.jpg')}} style="height:300px; width:300px;">
+      <div class="producttitle">Vitamin A</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$6.29</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/b1.jpg')}} style="height:300px; width:210px;">
+      <div class="producttitle">Vitamin B1</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$9.49</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/b2.jpg')}} style="height:300px; width:210px;">
+      <div class="producttitle">Vitamin B2</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$9.95</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/b3.jpg')}} style="height:300px; width:250px;">
+      <div class="producttitle">Vitamin B3</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$10.95</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/b5.jpg')}} style="height:300px; width:200px;">
+      <div class="producttitle">Vitamin B5</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$8.95</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/b6.jpg')}} style="height:300px; width:300px;">
+      <div class="producttitle">Vitamin B6</div>
+      <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$6.56</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/b12.jpg')}} style="height:300px; width:300px;">
+      <div class="producttitle">Vitamin B12</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$10.49</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/c.jpg')}} style="height:300px; width:300px;">
+      <div class="producttitle">Vitamin C</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$11.49</div></div>
+      </div>
+    <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/d.jpg')}} style="height:300px; width:300px;">
+      <div class="producttitle">Vitamin D</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$10.95</div></div>
+      </div>
+     <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/e.jpg')}} style="height:300px; width:300px;">
+      <div class="producttitle">Vitamin E</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$7.88</div></div>
+      </div>
+     <div class="col-sm-4" id="product" style="text-align:center;">
+      <img src={{url_for('static', filename='img/k.jpg')}} style="height:300px; width:300px;">
+      <div class="producttitle">Vitamin K</div>
+      <div class="productprice"><div class="pull-right"><a href="/cart" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$4.95</div></div>
+      </div>
+  </div>
+</div>
+
+
+<script>
+// Disable form submissions if there are invalid fields
+(function() {
+  window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('valid');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+
+</body>
+</html>

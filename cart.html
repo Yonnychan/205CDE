@@ -1,0 +1,90 @@
+<!dOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.css')}}">
+  <style>
+  body{
+    font-family:Palatino Linotype;
+    background-color:aliceblue;
+   }
+   form{
+   	background-color: lightsteelblue;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    color: white;
+    margin: 70px;
+   }
+   ul{
+   	list-style-type: none;
+   }
+  </style>
+</head>
+<body>
+ 	<form action="/cart" method =post>
+ 		<fieldset>
+ 			<legend>Shopping Cart</legend>
+ 			{{ form.hidden_tag() }}
+
+ 			<br>
+ 			{{ form.firstItem.label }}<br>
+ 			{{ form.firstItem }}
+ 			<br>
+ 			<br>
+ 			{{ form.firstItemQ.label }}<br>
+ 			{{ form.firstItemQ }}
+ 			<br>
+ 			<br>
+ 			{{ form.secondItem.label }}<br>
+ 			{{ form.secondItem }}
+ 			<br>
+ 			<br>
+ 			{{ form.secondItemQ.label }}<br>
+ 			{{ form.secondItemQ }}
+ 			<br>
+ 			<br>
+ 			{{ form.thirdItem.label }}<br>
+ 			{{ form.thirdItem }}
+ 			<br>
+ 			<br>
+ 			{{ form.thirdItemQ.label }}<br>
+ 			{{ form.thirdItemQ }}
+ 			<br>
+ 			<br>
+ 			{{ form.name.label }}<br>
+ 			{{ form.name }}
+ 			 {% for message in form.name.errors %}
+ 			<span style= "color:red">{{ message }}</span>
+ 			 {% endfor%}
+ 			 <br>
+
+ 			 <br>
+ 			{{ form.phone.label }}<br>
+ 			{{ form.phone }}
+ 			<br>
+
+ 			<br>
+ 			{{ form.email.label }}<br>
+ 			{{ form.email }}
+ 			<br>
+
+ 			<br>
+ 			{{ form.address.label }}<br>
+ 			{{ form.address }}
+ 			<br>
+ 			<br>
+ 			{{ form.payment.label }}<br>
+ 			{{ form.payment }}
+ 			<br>
+ 			
+ 			{{ form.submit }}
+     		
+
+ 		</fieldset>
+ 	</form>
+</body>
+</html>
+
+
+
+

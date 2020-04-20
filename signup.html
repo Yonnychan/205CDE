@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login form</title>
+  <style type="text/css">
+
+
+  #submitBtn{
+  display: inline-block;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color:darkgray;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px dimgray;
+  margin: 5px;
+  }
+
+  #submitBtn:hover {background-color: paleturquoise}
+
+  #submitBtn:active {
+  background-color:	lightsteelblue;
+  box-shadow: 1px 1px darkslategray;
+  transform: translateY(4px);
+  }
+
+  #signUpForm{
+    background-color: lightsteelblue;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  body{
+    font-family:Palatino Linotype;
+    background-color:aliceblue;
+  }
+
+</style>
+ </head>
+ <body>
+
+  <form action="/login" method="POST">
+ 	<div class="container" id="signUpForm">
+  	<h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+  	<p>Username: <input type="text" name="username" /></p>
+  	<p>Password: <input type="text" name="password" /></p>
+  	<p><input type="submit" id="submitBtn" name="Submit" /></p>
+	</div>
+  </form>
+
+</body>
+</html>
+
+
+
+

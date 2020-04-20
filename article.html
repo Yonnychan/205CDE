@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Health</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 50%; 
+  height: 100%; 
+  overflow: auto; 
+  padding-top: 50px;
+  padding: 5%;
+}
+#nav{
+  position:fixed;
+  width: 100%;
+  left:0px;
+}
+#more {display: none;}
+
+#post{
+  text-align:center;
+  width:95%;
+  margin-top:80px;
+  margin-left: 40px;
+  margin-right: auto;
+  font: italic 1.2em serif;
+}
+
+.post{
+  padding:70px;
+  border-radius: 3px;
+  opacity: 90%;
+  color:white;
+  border-style: double;
+  border-color: lightgrey;
+  border-width: 10px;
+  background-color:slategray;
+}
+
+#card{
+  background-color:steelblue;
+}
+#cardHeader{
+  background-color:lightblue;
+}
+
+#item{
+  background-color:thistle;
+}
+#itemHeader{
+  background-color:lavender;
+}
+
+#choice{
+  top: 50%;
+  position: fixed;
+}
+
+#loginbtn {
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px navy;
+  margin: 5px;
+}
+
+#loginbtn:hover {background-color: skyblue}
+
+#loginbtn:active {
+  background-color: powderblue;
+  box-shadow: 0 3px aliceblue;
+  transform: translateY(4px);
+}
+
+#signUpBtn{
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: royalblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px navy;
+  margin: 5px;
+}
+#signUpBtn:hover {background-color: dodgerblue}
+
+#signUpBtn:active {
+  background-color: steelblue;
+  box-shadow: 0 3px aliceblue;
+  transform: translateY(4px);
+}
+
+#submitBtn{
+  display: inline-block;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color:darkgray;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px dimgray;
+  margin: 5px;
+}
+#submitBtn:hover {background-color: paleturquoise}
+
+#submitBtn:active {
+  background-color:	lightsteelblue;
+  box-shadow: 1px 1px darkslategray;
+  transform: translateY(4px);
+}
+
+#signUpForm{
+  background-color: lightsteelblue;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+#readMoreBtn{
+  background-color: pink;
+  color: white;
+  font-size: 100%;
+  padding: 1%;
+  border: 3px solid white;
+  border-radius: 5px;
+  text-align: center; 
+  margin:2%;
+}
+
+#readMoreBtn:hover {background-color: palevioletred}
+
+#readMoreBtn:active {
+  background-color: lightcoral;
+}
+
+body{
+  font-family:Palatino Linotype;
+  background-color:aliceblue;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 100px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#selectBtn{
+  display: inline-block;
+  padding: 6px;
+  outline: none;
+  color: #fff;
+  background-color:darkgray;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px dimgray;
+  margin-top: 10px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="nav">
+  <a class="navbar-brand" href="file:///C:/Users/Yonny/Desktop/setup.html">
+   <img src={{url_for('static', filename='img/logo.png')}}  alt="logo" style="width:40px; height:40px;"> Healthcare Planner
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/product">Store</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/list">Listing of vitamins</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  active" href="/article">Article</a>
+    </li>
+  </ul>
+  </div>
+</nav>
+
+<div class="position-fixed" id="main">
+  <button class="openbtn" onclick="openNav()" id="selectBtn">☰ </button>  
+</div>
+<body data-spy="scroll" data-target="#list" data-offset="1">
+	<div id="mySidebar" class="sidebar">
+  	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+	<a href="#section1">Simple Ways to Keep Fit</a>
+	<a href="#section2">Best Time to Take Vitamins</a>
+	<a href="#section3">Vitamins That Help Brain Health</a>
+	<a href="#section4">Best Supplements for Training</a>
+	<a href="#section5">Vitamins for Different Age Groups</a>
+	<a href="#section6">Benefits of Taking Multivitamins</a>
+</div>
+
+<div class="col-sm col" id="post">
+  <div id="section1" class="post">    
+     <h1 style="text-align:center">6 Simple Ways to Keep Fit</h1></br>
+       <p>1. Balanced Diet: </br>Intake of food and eating habits play a major and prime role in the way we live our life and with what kind of lifestyle-healthy or unhealthy. A balanced diet consists of various constituents of food in accurate and appropriate quantity and quality according to the requirement of individual. It is easily digestible and contains appropriate ratio between proteins, fats and carbohydrates that is 1:1:4 for overall development of body in the fit proportion. The diet may vary from person to person according to the body requirements as per consultation from a dietician or family doctor.<span id="dots">...</span><span id="more">
+       </br></br>2. Active lifestyle: </br>This plays a pertinent role in maintaining fitness. School children should prefer walking instead of being driven by any kind of vehicle if it is at a walking distance. Stairs can be used instead of elevators. Rather than sticking to T.V or mobile screens one should opt for outdoor games. In this manner one could lead a more active lifestyle by adding to it more efforts physically.
+       </br></br>3. Yoga and exercises or workout: </br>Research studies have proved that stress and tension leads to weight gain and ruin fitness levels. These activities are greatly beneficial in relieving those and therefore should be used for keeping a good control on weight and body fitness. Also this controls your weight by burning excess calories stored in body and therefore plays a significant role in maintaining healthy weight when partnered with balanced meals.
+       </br></br>4. Avoid fatty foods: </br>Fats are, a maximum contributors to number of calories. These extra number more than the required number, tends to accumulate in the body, so better to avoid it, the more you can, the more are the Chances of you remaining fit.
+       </br></br>5. Do not skip meals: </br> Skipping meals is a strict No as against myths by individuals on dieting for the fit body, such as breakfast, lunch and dinner. Once you skip any meal, you will definitely go for overeating during the next meal time leading to weight gain, as this increases hunger and results in greater food consumption next time.
+       </br></br>6. Avoid alcohol, smoking and drugs: </br>Always keep this in your mind that these addiction agents tends to weight gain. Alcohol is directly absorbed from the stomach in the blood stream and easily stored as fats. So avoid it altogether to facilitate body fitness.
+       </span></p>
+       <button onclick="showMore()" id="readMoreBtn">Read more</button>
+  </div></br>
+  <div id="section2" class="post">    
+     <h1 style="text-align:center">Best Time to Take Vitamins: A General Rule</h1></br>
+       <p>As a general rule, most manufacturers and experts recommend taking vitamins and supplements in the morning after your first meal. This is often the recommended direction for use you can find on the packaging or product information guide for most supplements on the market.
+       </br></br>The purpose of taking your vitamins after a meal is not so much about maximizing their absorption (with a few exceptions; we’ll get to that later) as much as it is to simply prevent digestive issues.
+       </br></br>Depending on the vitamin or supplement, ingesting them on an empty stomach could lead to stomach pains, heartburn, acid reflux, nausea, and even a bad case of diarrhea. These symptoms often happen when you overdose on vitamins and minerals. When you jump start your day with concentrated forms of vitamins and supplements instead of acquiring them with normal food intake, the result can be effectively similar to a sudden spike of temporary overdose.
+       </br></br>When it comes to vitamins and supplements, food acts as a sort of buffer, preventing rapid absorption of super concentrated nutrients in the gut and the bloodstream. While quick absorbtion may often be considered a desirable feature, the human body is not built for sudden spikes in nutrient absorption. That is why taking some vitamins and supplements on an empty stomach may sometimes result in undesirable side effects for some people.    
+       <div class="moreContent">
+	 <p>Best time to take Fat Soluble Vitamins</p>
+         <a href="#FatSol" id="readMoreBtn" data-toggle="collapse">Read now</a>
+         <div id="FatSol" class="collapse"></br>
+         <p>The four fat soluble vitamins are vitamins A, D, E, and K. Unlike water soluble vitamins, the body only requires small doses of fat soluble vitamins. Furthermore, high doses have been shown to cause undesirable side effects and toxicity. 
+	 </br></br>Because of the small dosage requirements, fat soluble vitamins can be acquired through diet alone, with the important exception of Vitamin D, which your body produces when you’re exposed to sunlight.
+	 </br></br>If you decide to include fat soluble vitamins in your supplements regimen, it is best to take them together with a fatty meal. Some studies suggest taking fat soluble vitamins with fish or cod liver oil to boost absorption especially for lactating women. 
+	 </br></br>To maximize the health benefits of both fat soluble vitamins and the fats you consume them with, it is sensible to opt for healthy oils such as flaxseed or olive oil. Eating nuts, seeds, and even avocados alongside fat soluble vitamin intake also boosts absorption. Some studies suggest that it may be best to avoid taking Vitamin D at night to avoid sleep disturbance.
+	 </p></div>
+       </div></br>
+       <div class="moreContent">
+	<p>Best time to take Water Soluble Vitamins</p>
+         <a href="#WaterSol" id="readMoreBtn" data-toggle="collapse">Read now</a>
+         <div id="WaterSol" class="collapse"></br>
+         <p>Vitamin C and all the B vitamins (thiamine as B1, riboflavin as B2, niacin as B3, pantothenic acid as B5, pyridoxine as B6, biotin, folic acid, and cobalamin as B12) are water soluble vitamins. Unlike some of their fat soluble counterparts, humans are incapable of synthesizing their own water soluble vitamins, and must rely on exogenous sources such as ensuring adequate supply through healthy diet, and/or taking supplements.
+	 </br></br>Unlike fat soluble vitamins, water soluble vitamins do not need to be consumed with a meal containing some fat in order to be consumed - in fact it’s generally fine to consume them whenever you like, with some exceptions that we will discuss below, and bearing in mind the general rule to take supplements together with food. It’s also worth remembering that dehydration can adversely impact absorbtion of water soluble vitamins.
+	 </br></br>One good thing about water soluble vitamins is that you’re unlikely to overdose on them because excess water soluble vitamins are normally excreted through urine. With a few exceptions, the body generally doesn’t store excess water soluble vitamins. You even lose water soluble vitamins through sweat, but it’s generally agreed to be of negligible impact.
+	 </br></br>When it comes to B vitamins, you know you took too much when your urine is bright yellow and stays that way for half the day. If the color bothers you, you can always drink copious amounts of water and urinate until the color goes back to normal. Note that some B vitamin supplements include caffeine or other energy boosting substances; these should clearly be avoided at night to prevent sleep disturbance.
+	 </br></br>In certain cases, taking vitamin C on an empty stomach may causes gut problems and sometimes lead to diarrhea. This is why it would be better to take vitamin C with a meal or to take “buffered” forms to make them easier on your stomach. You can also lower the dosage by either cutting the tablet in half or to simply buy a smaller-dosed vitamin C and spacing out your consumption through the day.
+	 </p></div>
+       </div></br>
+       <div class="moreContent">
+	 <p>Best time to take Prenatal Vitamins and Minerals</p>
+         <a href="#preSol" id="readMoreBtn" data-toggle="collapse">Read now</a></br></br>
+         <div id="preSol" class="collapse"></br>
+        <p>For most people, the only vitamins and supplements they need to worry about are those that belong in either fat soluble or water soluble vitamin families. However, for those who may want a kid or two, they have to account for prenatal vitamins and minerals.	
+	</br></br>Prenatal vitamins are strongly recommended for pregnant women. Folic acid is a must-have, and iron, Omega 3s (in the form of DHA and EPA), zinc, and magnesium are also typicaly taken as prenatal supplements. While similar rules apply when it comes to absorption, there are a few instances where expecting moms need to do a little something extra to maximize vitamin and supplement potency.
+	</br></br>Women who plan on conceiving should plan ahead when it comes to vitamins and supplements. For folic acid and iron, it’s best to take them at least 30 days before conceiving.
+	</br></br>For omega 3s DHA and EPA, it’s a good idea to start as much as six months before pregnancy because being pregnant automatically reduces the overall DHA and EPA content of the body. Supplementing well ahead of conception should also help provide the baby enough DHA and EPA, preventing development issues associated with deficiency.
+	</br></br>Other than planning ahead, generally speaking prenatal vitamins (as multivitamins) are best taken during lunch time or after you’ve had a good meal to absorb them properly, especially since some nutrients in a prenatal multivitamin could be fat-soluble.
+	</br></br>For zinc, it’s best to take it with a meal as taking zinc supplements on an empty stomach could result to nausea, especially when taken in excessive amounts. 
+	</p></div>
+       </div></div></br>      
+      <div id="section3" class="post">         
+        <h1>4 Vitamins That Help Brain Health And Memory</h1>
+	 <p>Did you know that the human brain uses more energy than any other organ in the body? While the brain represents only 2% of total body weight, it accounts for more than 20% of the body’s total energy expenditure. (1) When considering vitamins that support brain health, we need to understand that the brain is like a sponge soaking up what it can — including nutrients from food and dietary supplements — to remain active. Fortunately, there are many key vitamins that can help patients maintain, and even enhance their brain function.
+	 </br></br>Like many patients, you too may be interested in supporting brain function from a cognitive and mental health standpoint. After all, the brain never takes a break. It works round the clock, 24/7!</p>
+         <div class="moreContent">
+	 <p>1. Vitamin B</p>
+         <a href="#vitB" id="readMoreBtn" data-toggle="collapse">Read now</a>
+         <div id="vitB" class="collapse"></br>
+         <p>When it comes to B vitamins, you could say that the B stands for the brain! As it turns out, the best vitamins for brain health are B vitamins. Vitamin B12, in particular, is one of the best vitamins for brain health. In fact, research has confirmed that there is a direct correlation between vitamin B12 deficiency and poor brain health. One connection between the B vitamins and brain health is with homocysteine. It is widely known that high homocysteine levels can contribute to poor health, which includes poor brain function. It is also scientifically accepted that B vitamins help keep homocysteine levels in check.
+	 </br></br>“The B vitamins that participate in one-carbon metabolism include folate, vitamin B12, and B6; deficiency or congenital defects in enzymes involved in the metabolism of these B vitamins are associated with impairment in brain function,” wrote Irwin H. Rosenberg, MD, in the journal Nutrition Reviews.
+	 </br></br>In addition to their role in homocysteine metabolism, B vitamins are intimately involved in catabolic energy production in the cells. The B vitamins are also known to easily cross the blood-brain barrier. “Once in the brain, specific cellular uptake mechanisms dictate distribution, and, whilst the B vitamins all have high turnovers, ranging from 8% to 100% per day, their levels are tightly regulated by multiple homeostatic mechanisms in the brain,” according to a 2016 review featured in the journal Nutrients.
+	</p></div>
+         </div></br>
+        <div class="moreContent">
+	 <p>2. Vitamin C</p>
+         <a href="#vitC" id="readMoreBtn" data-toggle="collapse">Read now</a>
+         <div id="vitC" class="collapse"></br>
+         <p>In addition to the B vitamins, vitamin C can also help support brain health because of its high antioxidant activity. According to a 2017 review of 50 studies, the primary brain benefit that comes from vitamin C accrues to those of us who are deficient in the vitamin. According to a 2014 paper published in the journal Nutrients, “Increasing evidence is pointing to vitamin C as an important redox homeostatic factor in the central nervous system, linking an inadequate dietary supply of vitamin C to negative effects on cognitive performance.” This is especially true with aging adults as vitamin C deficiency is more common among older persons.
+	 </p></div>
+         </div></br>
+       <div class="moreContent">
+	 <p>3. Vitamin E</p>
+         <a href="#vitE" id="readMoreBtn" data-toggle="collapse">Read now</a>
+         <div id="vitE" class="collapse"></br>
+         <p>Vitamin E has a mechanism similar to vitamin C and brain health because it too is a powerful antioxidant. Also similar to vitamin C, research demonstrates that low vitamin E levels can contribute to poor brain function. Preliminary animal studies also suggest that vitamin E supplementation can have a protective effect on brain function.
+	 </p></div>
+         </div></br>
+	 <div class="moreContent">
+	 <p>4. Vitamin K</p>
+         <a href="#vitK" id="readMoreBtn" data-toggle="collapse">Read now</a>
+         <div id="vitK" class="collapse"></br>
+         <p>Vitamin E benefits brain health and so does vitamin K. When we think of vitamin K we typically think of strong bones. But we should also be thinking about brain health. Regarding brain function, studies have shown that vitamin K influences sphingolipids, which are fatty acid compounds in brain cell membranes. To determine the association between vitamin K status and brain function, researchers evaluated 192 people equal to or older than 65 years. This was known as the CLIP study and the researchers concluded, “The main finding of this cross-sectional study is that, irrespective of all measured potential confounders, increased dietary phylloquinone intake was associated with better cognition and behavior among geriatric patients.” 
+	 </p></div>
+         </div></br>
+	 <div class="moreContent">
+	 <p>More</p>
+         <a href="#vit" id="readMoreBtn" data-toggle="collapse">Read now</a>
+         <div id="vit" class="collapse"></br>
+         <p>These foundational vitamins—Bs, C, E, and K—can help support health on many levels, including brain function. But when it comes to maintaining, enhancing, and protecting brain health, it’s also important to remind patients of these three basic and critical lifestyle factors:
+	 </br></br>Exercise. Research shows that exercise doesn’t just help your body stay fit, it helps your brain too. There are many brain-boosting benefits from exercise, including enhanced memory and cognition.
+	 </br></br>Sleep. Getting enough sleep is critical to health in general but it’s also important to brain health. While the body sleeps, the glymphatic system kicks in to start detoxifying the brain of neurotoxic waste proteins such as β-amyloid.
+	 </br></br>Diet. The research is clear: a whole-food, unprocessed diet that includes plenty of healthy fats is good for the brain.
+	 </br></br>Protecting and enhancing brain function is important to all of us. As mentioned above, you can benefit immensely from a proactive brain health plan that includes basic lifestyle advice coupled with vitamin deficiency prevention, and supplementation with vitamins that promote brain health.
+	 </br></br>You’re now well on your way to “soaking up” all these benefits to power your super brain!
+	 </p></div>
+         </div></br>
+	 </div></br>        
+      <div id="section4" class="post"> 	        
+        <h1>The 7 best supplements to support your training</h1>
+        <p>Protein:</br>Whey protein has been proven to help with athletic performance, muscle building and fat loss. The best natural sources are the whey and casein proteins in milk, which have more branched-chain amino acids (BCAAs) than vegan sources. The key amino acid you want in your shake is leucine – it’s the most important one for protein synthesis. Some brands will bulk out their powders with other amino acids to keep them cheaper but they aren’t as effective for building muscle, so check the label carefully to see if leucine is the main amino acid used. If possible, opt for protein that’s in isolate form, which is slightly purer than concentrate and hydrolysed. 
+	<div class="moreContent"><a href="#other" id="readMoreBtn" data-toggle="collapse">More content</a>
+         <div id="other" class="collapse"></br>
+	Creatine:</br>Pure creatine monohydrate is the most studied and the most beneficial supplement for building strength. It gives you the capacity to get through a few more reps in a workout, boosts your power output and increases water retention in your muscles, called cellular swelling, which can help with muscle growth. 
+	</br></br>Vitamin D:</br>As with most vitamins, if you’re getting enough vitamin D – from your diet and exposure to sunlight – you don’t need supplementation. But if you live in the UK, it can be difficult to get what you need from sunlight, especially outside the summer months. It’s worth checking your levels – with your doctor or a test such as that found at vitamindtest.org.uk – all year round, not just in the winter. If your levels are low, so is your testosterone. Supps will help with this, with the knock-on effect of boosting training performance.
+	</br></br>Vitamin K2:</br>Vitamin K1 is what you get from green, leafy vegetables, but K2 comes from animal sources, especially livers. It can improve bone strength and decrease calcium build-up in your blood vessels, thereby reducing calcification of your arteries and risk of stroke and heart disease. Supplementation will help, especially for vegetarians who will miss out on these nutrients from animal foods. 
+	</br></br>Beta-alanine:</br>This naturally occurring beta amino acid can help with endurance and possibly building muscle, but it’s not as well studied as creatine. It helps you buffer lactic acid to resist fatigue and get through a few more reps. 
+	</br></br>Berberine:</br>This is one of the most potent supplements there is, although few people know about it. It’s a pharmaceutical drug used to treat diabetes because it improves insulin sensitivity. If you have blood sugar issues and you put on fat easily, check with your doctor to find out if you could benefit from taking berberine. 
+	</br></br>Magnesium:</br>Magnesium is used in over 300 chemical reactions in the body. If you have plenty of seeds, nuts, leafy green veg, dark chocolate and coffee in your diet you should be getting enough, but if you’re deficient it can affect energy, bone strength, the nervous system and blood sugar control. Magnesium supplements have been shown to help with recovery and muscle contraction and have a positive influence on blood pressure. 
+	</div>
+         </div></br></div></br>    
+     <div id="section5" class="post">    
+  <div class="container">
+   <h1 style="text-align:center">The Vitamins You Need to Take at Every Age</h1></br>
+    <p> These are the years to focus on getting enough vitamin D and calcium, says Stephanie Schiff, RDN, a nutritionist at Northwell Health’s Huntington Hospital in Huntington, NY. “We need calcium for bone and muscle growth, but it doesn’t get absorbed as well without vitamin D,” she says. “These are the bone-building years for boys and girls, and if you don’t build enough bone, you will be prone to brittle bones later in life.” Tweens and teens should get 600 international units (IU) of vitamin D per day and 1,300 mg of calcium per day, according to the National Institutes of Health’s Office of Dietary Supplements. Of course, it’s always best to get our nutrients from the foods we eat. Some tweens and teens may have special needs due to their diet or circumstances, and some foods will be a hard sell. Check out these surprising sources of calcium for dairy haters. Make it a habit to discuss diet and nutrition with your child’s doctor during their visits.
+    </p>
+   <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age20">Your 20s</a>
+      </div>
+      <div id="age20" class="collapse " data-parent="#accordion">
+        <div class="card-body" id="card">
+          <p>You still want to keep up with calcium and vitamin D in your 20s, Schiff says. You may need other vitamins or minerals at this age, depending on your diet. For example, vegans often need extra B12, as it is mainly found in animal products, she says. And you want to make sure you’re getting enough, because here’s what happens to your body when you don’t get enough B12. “Food is always better than supplements because, with a supplement, we are just extracting a single nutrient,” she says. “Whole foods contain vitamins, minerals, and fiber—all of which work synergistically.”
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age25">
+        Your 20s and 30s
+      </a>
+      </div>
+      <div id="age25" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+          <p>For many women, “these tend to be the child-bearing years,” says Suzanne R. Steinbaum, DO, director of Women’s Cardiovascular Prevention, Health, and Wellness at Mount Sinai Hospital in New York City. If you’re planning to get pregnant, start taking a prenatal vitamin with folic acid and B-complex. The time to start is before you get pregnant. Folic acid reduces the risk of neural tube birth defects and other B vitamins help support a healthy pregnancy. Taking these vitamins may also reduce your babies’ autism risk. Women with heavy menstrual periods may need extra iron too, says Dr. Steinbaum. And don’t forget calcium and vitamin D.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age30">
+        More 30s
+      </a>
+      </div>
+      <div id="age30" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+          <p>As a cardiologist, Dr. Steinbaum is a big fan of anti-inflammatory omega-3 fatty acids, which help lower risk for heart disease. The American Heart Association (AHA) recommends eating fatty fish such as mackerel or salmon at least twice a week for optimal heart health. (Don’t like fish? Here’s how you can get your omega-3s.) This is sage counsel for men and women, says Dr. Steinbaum, a spokesperson for the AHA’s Go Red for Women campaign, and your thirties is no time to skimp on your calcium and vitamin D, she says. Make these 13 health tweaks in your thirties to stay healthy for the rest of your life.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age40">
+        Your 40s
+      </a>
+      </div>
+      <div id="age40" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+         <p>Vitamin D becomes even more important in your forties, Dr. Steinbaum says. Low levels of vitamin D have been linked to a host of diseases—from cancer and autoimmune conditions to diabetes and obesity—and our risks for many of these tend to increase with advancing age. “Get your blood levels of vitamin D tested to see where you stand and supplement accordingly,” she suggests. This holds for men and women in their fourth decade—you may be low and not even know it. It’s almost impossible to get all the D you need from food alone and almost none of us gets enough sun in the era of sunscreen, so D supplements may be necessary. Calcium matters too, she says. And don’t forget your omega-3s either, as heart disease risk climbs with age for men and women, she shares.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age50">
+        Your 50s
+      </a>
+      </div>
+      <div id="age50" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+        <p>Your calcium requirement is 1,200 mg during your fifth decade, and vitamin D is still essential to help your body absorb this important mineral. “Now instead of building bone you are preserving the bone you already have,” Schiff says. It’s important to discuss your specific calcium and vitamin D needs with your doctor, she adds. (Women are at greater risk for the brittle-bone disease osteoporosis than men and may need to take additional measures.) “Talk to your doctor to make sure there are no other issues or contraindications with other medications that may affect how you absorb calcium,” she says. Here are 10 other crucial health tweaks to make in your 50s.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age55">
+        More 50s
+      </a>
+      </div>
+      <div id="age55" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+        <p>Women may be entering menopause during this decade, and certain natural remedies may help reduce the signs and symptoms of menopause.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age60">
+        Your 60s
+      </a>
+      </div>
+      <div id="age60" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+         <p>Calcium and vitamin D matter a lot as you get older, Schiff says. Make sure you are getting all that you need from food or supplements. “Talk to your doctor about your diet to see if any other vitamins are needed; how and what we eat may change with age,” she says. Heart health is important too, so make sure that you are getting enough omega-3’s, Dr. Steinbaum says. Check out the supplements heart doctors take every day.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age70">
+        Your 70s
+      </a>
+      </div>
+      <div id="age70" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+        <p>In addition to calcium and vitamin D, you may need some extra B12 during your 70s, Schiff says. “As you get older, it’s harder for your body to make and use B12, and supplements may be needed,” she says. Check out the 11 silent signs you’re not getting enough vitamin B12.
+       </p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age80">
+        Your 80s
+      </a>
+      </div>
+      <div id="age80" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+         <p>Supplemental B12 may be important during your octogenarian years too, Schiff says. Again, keep up with your calcium, vitamin D, and omega-3 during your 80s, and make sure to let your doctor know about any changes to your diet or medication regimen.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="cardHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#age90">
+          90s and up
+        </a>
+      </div>
+      <div id="age90" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="card">
+         <p>Whatever you’re doing is likely working if you are enjoying your ninth decade. Keep it up and check out what centenarians really eat to live longer.
+	</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div></br>
+<div id="section6" class="post">    
+  <div class="container">
+   <h1 style="text-align:center">5 Benefits of Taking Multivitamins Daily</h1></br>
+    <p> What are multivitamins?
+    </br></br>Your body needs vitamins and nutrients to function properly. For that, you need to eat a balanced diet. Unfortunately, not everyone gets to eat the right food everyday. That’s where multivitamins come in.
+    </br></br>Multivitamins are a combination of different vitamins normally found in food sources. They are used to provide vitamins that are not taken in through your diet. Basically, multivitamins help bridge some nutrient gaps so you can meet the recommended amount of nutrients.
+     </p>
+   <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="itemHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#benefit1">1. Increased energy levels</a>
+      </div>
+       <div id="benefit1" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="item">
+          <p>When you don’t get enough vitamins, your body has to work harder to perform simple tasks, which can lead to fatigue and other health problems. Taking multivitamins and keeping a healthy lifestyle can keep you energetic and fit.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="itemHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#benefit2">
+        2. Improved mood
+      </a>
+      </div>
+      <div id="benefit2" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="item">
+          <p>Certain studies have shown that daily multivitamin has positive effects on a person’s mood and emotional well-being. Getting enough vitamins and minerals improves the brain functions responsible for your mood.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="itemHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#benefit3">
+        3. Reduces stress and anxiety
+      </a>
+      </div>
+      <div id="benefit3" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="item">
+          <p>The vitamins and minerals in your daily multivitamin can also significantly reduce levels of stress and anxiety. The body uses B vitamins to convert food into energy, keep the nervous system functioning properly, and to produce stress hormones. Taking multivitamins daily can replenish your body’s supply.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="itemHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#benefit4">
+        4. Improved short-term memory
+      </a>
+      </div>
+      <div id="benefit4" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="item">
+         <p>A recent study from Australia showed that B vitamins has a significant impact in supporting short-term memory function. In the research, older participants who supplemented with vitamin B12 did better in memory tests compared to those who did not take supplements.
+	</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="itemHeader">
+        <a class="collapsed card-link" data-toggle="collapse" href="#benefit5">
+        5. Maintained muscle strength
+      </a>
+      </div>
+      <div id="benefit5" class="collapse" data-parent="#accordion">
+        <div class="card-body" id="item">
+        <p>Free radicals are mainly responsible for muscle aging-related problems. Taking multivitamins daily can help keep these damaging free radicals in check.
+	</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Disable form submissions if there are invalid fields
+(function() {
+  window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('valid');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+function showMore() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("readMoreBtn");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more"; 
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less"; 
+    moreText.style.display = "inline";
+  }
+}
+
+
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+</body>
+</html>
